@@ -49,15 +49,15 @@ SimpleDiffuserModel::SimpleDiffuserModel(double P_in,
 										 double A_out,
 										 double P_out
 										 ) {
-    //toluene constants
-    su2double gamma =1.06;
-    su2double R=90.23;
-    su2double Pstar = 4126300.0;        //critical pressure toluene
-    su2double Tstar = 591.75;           //critical temperature toluene
-    su2double w = 0.2657;
-    StateInlet = new CPengRobinson(gamma, R, Pstar, Tstar, w);
-    StateInlet->SetTDState_Prho(P_in, rho_in);
-    VelocityInlet = c_in;
+	//toluene constants
+	su2double gamma =1.06;
+	su2double R=90.23;
+	su2double Pstar = 4126300.0;        //critical pressure toluene
+	su2double Tstar = 591.75;           //critical temperature toluene
+	su2double w = 0.2657;
+	StateInlet = new CPengRobinson(gamma, R, Pstar, Tstar, w);
+	StateInlet->SetTDState_Prho(P_in, rho_in);
+	VelocityInlet = c_in;
 
 	StateIsentropicOutlet = new CPengRobinson(gamma, R, Pstar, Tstar, w);
 	StateIsentropicOutlet->SetTDState_Ps(P_out, StateInlet->GetEntropy());
