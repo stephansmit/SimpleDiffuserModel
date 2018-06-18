@@ -11,13 +11,7 @@ protected:
 		void CalculateOutletState(double A_in,double A_out, double h0_in, double c_in, double P_out);
 
 public:
-		/*!
-		 * \brief Constructor of the class.
-		 */
 		SimpleDiffuserModel(void);
-		/*/
-		 * \brief Destructor of the class.
-		 */
 		SimpleDiffuserModel(double P_in,
 							double rho_in,
 							double h0_in,
