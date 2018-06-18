@@ -10,26 +10,53 @@ using namespace std;
 #include "../SU2-fork/SU2_CFD/src/transport_model.cpp"
 #include "../SU2-fork/SU2_CFD/include/transport_model.hpp"
 #include "../SU2-fork/SU2_CFD/src/transport_model_toluene.cpp"
-#include "simple_diffuser_model.hpp"
-#include "simple_diffuser_model.cpp"
+#include "include/simple_diffuser_model.hpp"
+#include "src/simple_diffuser_model.cpp"
 #include <iomanip>
+#include "include/configuration.h"
 
 
+configuration::data readConfigurationFile(string filename){
+	configuration::data configdata;
+	ifstream f( filename.c_str() );
+	f >> configdata;
+	f.close();
+	return configdata;
+}
 
+void writeOutputFile(string filename, SimpleDiffuserModel* SimpleDiffuserModel){
+	ofstream f;
+	f.open (filename.c_str());
+	f << "H_IN"    << ": " << SimpleDiffuserModel->GetEnthalpyIn() 	 << '\n';
+	f << "A_IN"    << ": " << SimpleDiffuserModel->GetAreaIn() 		 << '\n';
+	f << "RHO_IN"  << ": " << SimpleDiffuserModel->GetDensityIn()	 << '\n';
+	f << "P_IN"    << ": " << SimpleDiffuserModel->GetPressureIn() 	 << '\n';
+	f << "C_IN"    << ": " << SimpleDiffuserModel->GetVelocityIn() 	 << '\n';
+	f << "T_IN"    << ": " << SimpleDiffuserModel->GetTemperatureIn()<< '\n';
+	f << "H_OUT"   << ": " << SimpleDiffuserModel->GetEnthalpyOut()  << '\n';
+	f << "A_OUT"   << ": " << SimpleDiffuserModel->GetAreaOut() 	 << '\n';
+	f << "RHO_OUT" << ": " << SimpleDiffuserModel->GetDensityOut()	 << '\n';
+	f << "P_OUT"   << ": " << SimpleDiffuserModel->GetPressureOut()  << '\n';
+	f << "C_OUT"   << ": " << SimpleDiffuserModel->GetVelocityOut()  << '\n';
+	f << "T_OUT"   << ": " << SimpleDiffuserModel->GetTemperatureOut()<< '\n';
+	f << "EFFICIENCY" <<": " <<  SimpleDiffuserModel->GetEfficiency() << "\n";
+	f.close();
+}
 
+int main()
 
-
-
-int main() 
 {
+	configuration::data configData = readConfigurationFile("diffuser.cfg");
 
-    double P_in=11493.864797;
-    double rho_in=0.307649;
-    double h0_in=718624.090088;
-    double c_in=302.969728;
-    double A_in=368.64698860465114;
-    double A_out=10000;
-    double P_out=0.2e5;
+	double P_in  =configData.getDoubleValue("P_IN");
+    double rho_in=configData.getDoubleValue("RHO_IN");
+    double h0_in =configData.getDoubleValue("H0_IN");
+    double c_in  =configData.getDoubleValue("C_IN");
+    double A_in  =configData.getDoubleValue("A_IN");
+    double A_out =configData.getDoubleValue("A_OUT");
+    double P_out =configData.getDoubleValue("P_OUT");
+    string outputFilename = configData.getStringValue("OUTPUT_FILENAME");
+
 
     SimpleDiffuserModel* Diffuser = new  SimpleDiffuserModel(P_in,
 											rho_in,
@@ -40,13 +67,7 @@ int main()
 											P_out
 											);
 
-    su2double efficiency = Diffuser->GetEfficiency();
-    su2double temperatureOut = Diffuser->GetTemperatureOut();
-    su2double velocityOut = Diffuser->GetVelocityOut();
-
-
-    cout << "Velocity" << "\t" << "Temperature" << "\t" << "Efficiency" << "\n";
-    cout << velocityOut<< "\t" << temperatureOut<< "\t" <<  efficiency  << "\n";
+    writeOutputFile(outputFilename, Diffuser);
 
     return 0;
 

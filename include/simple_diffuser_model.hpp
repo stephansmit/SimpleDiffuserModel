@@ -8,6 +8,7 @@ protected:
 	CFluidModel *StateOutlet;
 	CFluidModel *StateIsentropicOutlet;
 	su2double VelocityInlet, VelocityOutlet;
+	su2double AreaInlet, AreaOutlet;
 	void CalculateOutletState(double A_in,double A_out, double h0_in, double c_in, double P_out);
 
 public:
@@ -21,6 +22,7 @@ public:
 						double P_out
 						);
 
+	su2double GetAreaOut();
 	su2double GetEnthalpyOut();
 	su2double GetDensityOut();
 	su2double GetVelocityOut();
@@ -32,6 +34,7 @@ public:
 	su2double GetIsentropicPressureOut();
 	su2double GetIsentropicTemperatureOut();
 
+	su2double GetAreaIn();
 	su2double GetEnthalpyIn();
 	su2double GetDensityIn();
 	su2double GetVelocityIn();

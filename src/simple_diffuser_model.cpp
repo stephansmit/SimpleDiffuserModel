@@ -1,4 +1,4 @@
-#include "simple_diffuser_model.hpp"
+#include "../include/simple_diffuser_model.hpp"
 
 void SimpleDiffuserModel::CalculateOutletState(double A_in,double A_out, double h0_in, double c_in, double P_out){
 	su2double c4o, c4n;
@@ -7,6 +7,8 @@ void SimpleDiffuserModel::CalculateOutletState(double A_in,double A_out, double 
 	c4o=0.1;	//initial guess
 	delta=1e-6; //step size
 	res = 1e10;	//residual
+	int maxIter = 100000;
+	int i=0;
 	while (res > 1e-8){
 		rho_out = StateInlet->GetDensity()*A_in*c_in/(A_out*c4o);	//Continuity
 		StateOutlet->SetTDState_Prho((su2double) P_out,rho_out);	//EOS
@@ -14,8 +16,12 @@ void SimpleDiffuserModel::CalculateOutletState(double A_in,double A_out, double 
 		c4n = pow(2*(h0_in-h_out), 0.5);							//Adiabatic
 		c4o = c4o +0.000001*(c4n-c4o);
 		res = fabs(c4o-c4n);
+		i+=1;
+		if (i>maxIter){ cout << "MAX ITER REACHED!\n"; break;};
 	}
 	VelocityOutlet=c4n;
+	AreaInlet = A_in;
+	AreaOutlet= A_out;
 }
 
 su2double SimpleDiffuserModel::GetEnthalpyIn() {
@@ -31,6 +37,10 @@ su2double SimpleDiffuserModel::GetVelocityIn(){
 su2double SimpleDiffuserModel::GetPressureIn(){
 	return StateInlet->GetPressure();
 }
+su2double SimpleDiffuserModel::GetAreaIn(){
+	return AreaInlet;
+}
+
 su2double SimpleDiffuserModel::GetTemperatureIn(){
 	return StateInlet->GetTemperature();
 }
@@ -65,7 +75,9 @@ su2double SimpleDiffuserModel::GetPressureOut(){
 su2double SimpleDiffuserModel::GetTemperatureOut(){
 	return StateOutlet->GetTemperature();
 }
-
+su2double SimpleDiffuserModel::GetAreaOut(){
+	return AreaOutlet;
+}
 
 su2double SimpleDiffuserModel::GetEfficiency(){
 	return (GetIsentropicEnthalpyOut()-GetEnthalpyIn())/(GetEnthalpyOut()-GetEnthalpyIn());

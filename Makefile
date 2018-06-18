@@ -3,7 +3,7 @@ OBJECT_01        = main.o
 SOURCE_01        = main.cpp
 
 $(TARGET): $(OBJECT_01)
-	         g++ -g --enable-checking -o $(TARGET) $(OBJECT_01) -lstdc++ 
+	         g++ -g --enable-checking -o $(TARGET) $(OBJECT_01) -lstdc++  
 		 @echo Make done
 
 $(OBJECT_01) : $(SOURCE_01) 
