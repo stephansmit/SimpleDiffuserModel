@@ -10,7 +10,6 @@ protected:
 		su2double VelocityInlet, VelocityOutlet;
 		void CalculateOutletState(double A_in,double A_out, double h0_in, double c_in, double P_out);
 
-
 public:
 		/*!
 		 * \brief Constructor of the class.
@@ -70,7 +69,6 @@ SimpleDiffuserModel::SimpleDiffuserModel(double P_in,
 	StateIsentropicOutlet->SetTDState_Ps(P_out, StateInlet->GetEntropy());
 
 	StateOutlet = new CPengRobinson(gamma, R, Pstar, Tstar, w);
-
 	CalculateOutletState(A_in, A_out, h0_in, c_in, P_out);
 
 }

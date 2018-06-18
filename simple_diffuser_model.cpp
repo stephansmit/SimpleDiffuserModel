@@ -22,46 +22,46 @@ void SimpleDiffuserModel::CalculateOutletState(double A_in,double A_out, double 
 su2double SimpleDiffuserModel::GetEfficiency(){
 	return (GetIsentropicEnthalpyOut()-GetEnthalpyIn())/(GetEnthalpyOut()-GetEnthalpyIn());
 }
-su2double SimpleDiffuserModel::GetIsentropicPressureOut(){
-	return StateIsentropicOutlet->GetPressure();
-}
+
 su2double SimpleDiffuserModel::GetPressureIn(){
 	return StateInlet->GetPressure();
-}
-su2double SimpleDiffuserModel::GetPressureOut(){
-	return StateOutlet->GetPressure();
-}
-su2double SimpleDiffuserModel::GetIsentropicDensityOut(){
-	return StateIsentropicOutlet->GetDensity();
 }
 su2double SimpleDiffuserModel::GetDensityIn(){
 	return StateInlet->GetPressure();
 }
-su2double SimpleDiffuserModel::GetDensityOut(){
-	return StateOutlet->GetDensity();
-}
-
-
-
-
 su2double SimpleDiffuserModel::GetEnthalpyIn() {
 	return StateInlet->GetStaticEnergy()
 			+StateInlet->GetPressure()/StateInlet->GetDensity();
+}
+su2double SimpleDiffuserModel::GetVelocityIn(){
+	return VelocityInlet;
+}
+
+
+su2double SimpleDiffuserModel::GetDensityOut(){
+	return StateOutlet->GetDensity();
+}
+su2double SimpleDiffuserModel::GetPressureOut(){
+	return StateOutlet->GetPressure();
 }
 su2double SimpleDiffuserModel::GetEnthalpyOut() {
 	return StateOutlet->GetStaticEnergy()
 			+StateOutlet->GetPressure()/StateOutlet->GetDensity();
 }
+su2double SimpleDiffuserModel::GetVelocityOut(){
+	return VelocityOutlet;
+}
+
+
 su2double SimpleDiffuserModel::GetIsentropicEnthalpyOut() {
 	return StateIsentropicOutlet->GetStaticEnergy()
 			+StateIsentropicOutlet->GetPressure()/StateIsentropicOutlet->GetDensity();
 }
-
-
-su2double SimpleDiffuserModel::GetVelocityOut(){
-	return VelocityOutlet;
+su2double SimpleDiffuserModel::GetIsentropicPressureOut(){
+	return StateIsentropicOutlet->GetPressure();
 }
-su2double SimpleDiffuserModel::GetVelocityIn(){
-	return VelocityInlet;
+su2double SimpleDiffuserModel::GetIsentropicDensityOut(){
+	return StateIsentropicOutlet->GetDensity();
 }
+
 
