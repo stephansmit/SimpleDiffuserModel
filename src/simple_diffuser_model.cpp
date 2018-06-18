@@ -29,7 +29,7 @@ su2double SimpleDiffuserModel::GetEnthalpyIn() {
 			+StateInlet->GetPressure()/StateInlet->GetDensity();
 }
 su2double SimpleDiffuserModel::GetDensityIn(){
-	return StateInlet->GetPressure();
+	return StateInlet->GetDensity();
 }
 su2double SimpleDiffuserModel::GetVelocityIn(){
 	return VelocityInlet;
