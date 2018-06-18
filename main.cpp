@@ -22,15 +22,6 @@ using namespace std;
 
 int main() 
 {
-    su2double rho3, rho4;
-    su2double A3, A4;
-    su2double  c3, c4;
-    su2double h03, h04;
-    su2double P3,P4;
-    su2double h3, h4, h4s;
-    su2double s3, s4;
-    su2double T3, T4;
-
 
     double P_in=11493.864797;
     double rho_in=0.307649;
@@ -48,36 +39,15 @@ int main()
 											A_out,
 											P_out
 											);
-    su2double efficiency = Diffuser->GetEfficiency();
-    cout << efficiency << "\n";
 
-//    s4 = FluidModelPR_4->GetEntropy();
-//    T4 = FluidModelPR_4->GetTemperature();
-//
-//    cout.precision(5);
-//    cout    << setw(20) << "s4"
-//        	<< setw(20) << "s3"
-//        	<< setw(20) << "c4"
-//        	<< setw(20) << "c3"
-//        	<< setw(20) << "T4"
-//        	<< setw(20) << "T3"
-//        	<< setw(20) << "P4"
-//        	<< setw(20) << "P3"
-//
-//        	<< "\n";
-//
-//    cout    << setw(20) << s4
-//    		<< setw(20) << s3
-//    		<< setw(20) << c4
-//    		<< setw(20) << c3
-//    		<< setw(20) << T4
-//    		<< setw(20) << T3
-//    		<< setw(20) << P4
-//    		<< setw(20) << P3
-//    		<< "\n";
-//
-//    su2double efficiency = (h4s-h3)/(h4-h3);
-//    cout << "Isentropic efficiency diffuser: " << efficiency << "\n";
+    su2double efficiency = Diffuser->GetEfficiency();
+    su2double temperatureOut = Diffuser->GetTemperatureOut();
+    su2double velocityOut = Diffuser->GetVelocityOut();
+
+
+    cout << "Velocity" << "\t" << "Temperature" << "\t" << "Efficiency" << "\n";
+    cout << velocityOut<< "\t" << temperatureOut<< "\t" <<  efficiency  << "\n";
+
     return 0;
 
 }

@@ -31,7 +31,9 @@ su2double SimpleDiffuserModel::GetVelocityIn(){
 su2double SimpleDiffuserModel::GetPressureIn(){
 	return StateInlet->GetPressure();
 }
-
+su2double SimpleDiffuserModel::GetTemperatureIn(){
+	return StateInlet->GetTemperature();
+}
 
 su2double SimpleDiffuserModel::GetIsentropicEnthalpyOut() {
 	return StateIsentropicOutlet->GetStaticEnergy()
@@ -43,7 +45,9 @@ su2double SimpleDiffuserModel::GetIsentropicDensityOut(){
 su2double SimpleDiffuserModel::GetIsentropicPressureOut(){
 	return StateIsentropicOutlet->GetPressure();
 }
-
+su2double SimpleDiffuserModel::GetIsentropicTemperatureOut(){
+	return StateIsentropicOutlet->GetTemperature();
+}
 
 su2double SimpleDiffuserModel::GetEnthalpyOut() {
 	return StateOutlet->GetStaticEnergy()
@@ -57,6 +61,9 @@ su2double SimpleDiffuserModel::GetVelocityOut(){
 }
 su2double SimpleDiffuserModel::GetPressureOut(){
 	return StateOutlet->GetPressure();
+}
+su2double SimpleDiffuserModel::GetTemperatureOut(){
+	return StateOutlet->GetTemperature();
 }
 
 

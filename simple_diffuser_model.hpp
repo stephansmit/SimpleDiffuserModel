@@ -25,13 +25,19 @@ public:
 	su2double GetDensityOut();
 	su2double GetVelocityOut();
 	su2double GetPressureOut();
+	su2double GetTemperatureOut();
+
 	su2double GetIsentropicEnthalpyOut();
 	su2double GetIsentropicDensityOut();
 	su2double GetIsentropicPressureOut();
+	su2double GetIsentropicTemperatureOut();
+
 	su2double GetEnthalpyIn();
 	su2double GetDensityIn();
 	su2double GetVelocityIn();
 	su2double GetPressureIn();
+	su2double GetTemperatureIn();
+
 	su2double GetEfficiency();
 
 	virtual ~SimpleDiffuserModel(void);
